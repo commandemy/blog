@@ -6,6 +6,9 @@ gem "sinatra-activerecord"
 gem "rake"
 
 gem "cucumber-sinatra"
+gem "cucumber"
+gem "capybara"
+gem "database_cleaner"
 gem "rspec", "2.99.0"
 
 group :development do

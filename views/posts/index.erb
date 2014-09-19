@@ -1,0 +1,16 @@
+<h1>My Blog</h1>
+
+<a href="/posts/new">Create new post</a>
+<a href="/about">About</a>
+
+<ul>
+<% @posts.each do |post| %>
+  <li id="post_<%= post.title.downcase.tr(" ", "_") %>">
+    <h2>
+      <a href="/posts/<%= post.id %>"><%= post.title %></a>
+    </h2>
+    Length: <%= post.number_of_characters %>
+    <a href="/posts/<%= post.id %>/edit">Edit</a>
+  </li>
+<% end %>
+</ul>

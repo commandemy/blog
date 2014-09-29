@@ -1,13 +1,13 @@
 <h1>New Post</h1>
 
-<form action="/posts" method="post">
+<form action="/posts" method="post" role="form">
   <label for="post_title">Title:</label><br />
-  <input id="post_title" name="post[title]" type="text" value="<%= @post.title %>" />
+  <input id="post_title" class="form-control" name="post[title]" type="text" value="<%= @post.title %>" />
   <br />
 
   <label for="post_text">Body:</label><br />
-  <textarea id="post_text" name="post[text]" rows="5"><%= @post.text %></textarea>
+  <textarea id="post_text" class="form-control" name="post[text]" rows="5"><%= @post.text %></textarea>
   <br />
 
-  <input type="submit" value="Save" />
+  <input type="submit" value="Save" class="btn btn-success" />
 </form>

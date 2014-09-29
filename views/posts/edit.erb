@@ -1,22 +1,22 @@
 <h1>Edit - <%= @post.title %></h1>
 
-<form action="/posts/<%= @post.id %>" method="post">
+<form action="/posts/<%= @post.id %>" method="post" role="form">
   <input type="hidden" name="_method" value="put" />
 
   <label for="post_title">Title:</label><br />
-  <input id="post_title" name="post[title]" type="text" value="<%= @post.title %>" />
+  <input id="post_title" class="form-control" name="post[title]" type="text" value="<%= @post.title %>" />
   <br />
 
   <label for="post_text">Body:</label><br />
-  <textarea id="post_text" name="post[text]" rows="5"><%= @post.text %></textarea>
+  <textarea id="post_text" class="form-control" name="post[text]" rows="5"><%= @post.text %></textarea>
   <br />
 
-  <input type="submit" value="Update" />
+  <input class="btn btn-success" type="submit" value="Update" />
 </form>
 
 <h2>Delete this post</h2>
 
 <form action="/posts/<%= @post.id %>" method="post">
   <input type="hidden" name="_method" value="delete" />
-  <input type="submit" value="Delete" />
+  <input class="btn btn-danger" type="submit" value="Delete" />
 </form>

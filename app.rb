@@ -5,70 +5,68 @@ require './environments'
 class Blog < Sinatra::Application
 end
 
-class Post < ActiveRecord::Base
-
+class Article < ActiveRecord::Base
   def number_of_characters
     self.text.length
   end
-
 end
 
 get '/' do
-  @posts = Post.order("created_at DESC")
-  erb :"posts/index"
+  @articles = Article.order("created_at DESC")
+  erb :"articles/index"
 end
 
 get '/about' do
   erb :"about/index"
 end
 
-# The New Post form sends a POST request (storing data) here
-# where we try to create the post it sent in its params hash.
-# If successful, redirect to that post. Otherwise, render the "posts/new"
-# template where the @post object will have the incomplete data that the
+# The New Article form sends a POST request (storing data) here
+# where we try to create the article it sent in its params hash.
+# If successful, redirect to that article. Otherwise, render the "posts/new"
+# template where the @article object will have the incomplete data that the
 # user can modify and resubmit.
-post "/posts" do
-  @post = Post.new(params[:post])
-  if @post.save
+post "/articles" do
+  @article = Article.new(params[:article])
+  if @article.save
     redirect "/"
   else
-    erb :"posts/new"
+    erb :"articles/new"
   end
 end
 
-# Get the New Post form
-get '/posts/new' do
-  @post = Post.new
-  erb :"posts/new"
+# Get the New Article form
+get '/articles/new' do
+  @article = Article.new
+  erb :"articles/new"
 end
 
-# Get the individual page of the post with this ID.
-get "/posts/:id" do
-  @post = Post.find(params[:id])
-  erb :"posts/show"
+# Get the individual page of the article with this ID.
+get "/articles/:id" do
+  @article = Article.find(params[:id])
+  erb :"articles/show"
 end
 
-# Get the Edit Post form of the post with this ID.
-get "/posts/:id/edit" do
-  @post = Post.find(params[:id])
-  erb :"posts/edit"
+# Get the Edit Article form of the article with this ID.
+get "/articles/:id/edit" do
+  @article = Article.find(params[:id])
+  erb :"articles/edit"
 end
 
-# The Edit Post form sends a PUT request (modifying data) here.
-# If the post is updated successfully, redirect to it. Otherwise,
-# render the edit form again with the failed @post object still in memory
+# The Edit Article form sends a PUT request (modifying data) here.
+# If the article is updated successfully, redirect to it. Otherwise,
+# render the edit form again with the failed @article object still in memory
 # so they can retry.
-put "/posts/:id" do
-  @post = Post.find(params[:id])
-  if @post.update_attributes(params[:post])
+put "/articles/:id" do
+  @article = Article.find(params[:id])
+  if @article.update_attributes(params[:article])
     redirect "/"
   else
-    erb :"posts/edit"
+    erb :"articles/edit"
   end
 end
 
-# Deletes the post with this ID and redirects to homepage.
-delete "/posts/:id" do
-  @post = Post.find(params[:id]).destroy
+# Deletes the article with this ID and redirects to homepage.
+delete "/articles/:id" do
+  @article = Article.find(params[:id]).destroy
   redirect "/"
 end

@@ -1,0 +1,13 @@
+<a class="btn btn-success" href="/articles/new">Create new article</a>
+
+<% @articles.each do |article| %>
+<div class="panel panel-default" style="margin-top:20px">
+  <div class="panel-body" id="article_<%= article.title.downcase.tr(" ", "_") %>">
+    <h2>
+      <a href="/articles/<%= article.id %>"><%= article.title %></a>
+    </h2>
+    Length: <%= article.number_of_characters %>
+    <a href="/articles/<%= article.id %>/edit">Edit</a>
+  </div>
+</div>
+<% end %>

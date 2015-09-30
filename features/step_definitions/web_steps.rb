@@ -18,18 +18,18 @@ World(WithinHelpers)
 
 # Own Steps
 
-Given(/^I have a post titled "(.*?)" with the text "(.*?)"$/) do |arg1, arg2|
-  Post.create(title: arg1, text: arg2)
+Given(/^I have an article titled "(.*?)" with the text "(.*?)"$/) do |arg1, arg2|
+  Article.create(title: arg1, text: arg2)
 end
 
 
-Given(/^I am editing a post titled "(.*?)"$/) do |post_title|
-  post = Post.find_by_title(post_title)
-  visit "/posts/#{post.id}/edit"
+Given(/^I am editing an article titled "(.*?)"$/) do |article_title|
+  article = Article.find_by_title(article_title)
+  visit "/articles/#{article.id}/edit"
 end
 
-Then(/^I should see the number of characters of the post displayed$/) do
-  page.should have_xpath('//*', :text => Post.first.number_of_characters)
+Then(/^I should see the number of characters of the article displayed$/) do
+  page.should have_xpath('//*', :text => Article.first.number_of_characters)
 end
 
 # end

@@ -16,8 +16,8 @@ module NavigationHelpers
     when /the about\s?page/
       '/about'
 
-    when /create new post\s?page/
-      '/posts/new'
+    when /create new article\s?page/
+      '/articles/new'
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

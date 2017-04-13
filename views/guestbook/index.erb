@@ -1,0 +1,7 @@
+<% @comments.each do |comment| %>
+  <div>
+    <p><b><%= comment[:visitor] %></b></p>
+    <p><%= comment[:comment] %></p>
+  </div>
+  <hr>
+<% end %>

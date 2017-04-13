@@ -16,26 +16,17 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-# Own Steps
-
-Given(/^I have an article titled "(.*?)" with the text "(.*?)"$/) do |arg1, arg2|
+Given(/^I have a article titled "(.*?)" with the text "(.*?)"$/) do |arg1, arg2|
   Article.create(title: arg1, text: arg2)
 end
 
-
-Given(/^I am editing an article titled "(.*?)"$/) do |article_title|
-  article = Article.find_by_title(article_title)
-  visit "/articles/#{article.id}/edit"
-end
-
-Then(/^I should see the number of characters of the article displayed$/) do
-  page.should have_xpath('//*', :text => Article.first.number_of_characters)
-end
-
-# end
-
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
+end
+
+Given(/^I am editing an article titled "(.*?)"$/) do |arg1|
+  article = Article.find_by_title(arg1)
+  visit "/articles/#{article.id}/edit"
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
@@ -50,7 +41,7 @@ end
 
 When /^(?:|I )follow "([^\"]*)"(?: within "([^\"]*)")?$/ do |link, selector|
   with_scope(selector) do
-    first(:link, link).click
+    click_link(link)
   end
 end
 
@@ -113,6 +104,10 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"(?: within "([^\"]*)")?$/ 
   with_scope(selector) do
     attach_file(field, path)
   end
+end
+
+Then(/^I should see the number of characters of the article displayed$/) do
+  page.should have_content(Article.first.number_of_characters)
 end
 
 Then /^(?:|I )should see JSON:$/ do |expected_json|
@@ -234,4 +229,15 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+Then(/^I should see a <comment> by a <visitor>$/) do |table|
+  table.hashes.each do |row|
+      page.should have_content(row["comment"])
+      page.should have_content(row["visitor"])
+  end
+end
+
+Then(/^I should see all articles as json$/) do
+  page.body.should == Article.all.to_json
 end

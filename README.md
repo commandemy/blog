@@ -1,5 +1,5 @@
-# Setup steps
+Sinatra Blogging Application
+by
+Jürgen
 
-- Create blog_dev.sqlite3 and blog_test.sqlite3 in app root directory
-- For real deployment we will use an actual database
-- Chef will have to push an improved config file to the sinatra app :)
+This is the first file of my app.
